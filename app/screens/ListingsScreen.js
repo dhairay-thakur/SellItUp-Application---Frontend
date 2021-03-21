@@ -11,11 +11,12 @@ import useApi from "../hooks/useApi";
 
 import styles from "../styles/Listings";
 
-function ListingsScreen({ navigation }) {
+function ListingsScreen({ navigation, route }) {
+  const id = route.params;
   const { data, error, loading, request: loadListings } = useApi(
     listingsApi.getAllListings
   );
-
+  console.log(id);
   useEffect(() => {
     loadListings();
   }, []);

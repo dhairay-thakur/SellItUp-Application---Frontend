@@ -10,15 +10,12 @@ const Stack = createStackNavigator();
 
 const FeedNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen
-      name="Listings"
-      component={ListingsScreen}
-    />
+    <Stack.Screen name="Listings" component={ListingsScreen} />
     <Stack.Screen
       name="ListingDetails"
       component={ListingDetailsScreen}
       options={{
-        gestureEnabled:true,
+        gestureEnabled: false,
         ...TransitionPresets.ModalSlideFromBottomIOS,
       }}
     />

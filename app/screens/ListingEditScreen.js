@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 import * as Yup from "yup";
 
 import {
@@ -9,10 +9,13 @@ import {
   SubmitButton,
 } from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+import Done from "../components/Done";
+import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import Modal from "react-native-modal";
 import listingsApi from "../api/listings";
-
+import categories from "../constants/categories";
 import styles from "../styles/ListingEdit";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -24,76 +27,43 @@ const validationSchema = Yup.object().shape({
   images: Yup.array().min(1, "Please select at least one image."),
 });
 
-const categories = [
-  {
-    backgroundColor: "#fc5c65",
-    icon: "floor-lamp",
-    label: "Furniture",
-    value: 1,
-  },
-  {
-    backgroundColor: "#fd9644",
-    icon: "car",
-    label: "Cars",
-    value: 2,
-  },
-  {
-    backgroundColor: "#fed330",
-    icon: "camera",
-    label: "Cameras",
-    value: 3,
-  },
-  {
-    backgroundColor: "#26de81",
-    icon: "cards",
-    label: "Games",
-    value: 4,
-  },
-  {
-    backgroundColor: "#2bcbba",
-    icon: "shoe-heel",
-    label: "Clothing",
-    value: 5,
-  },
-  {
-    backgroundColor: "#45aaf2",
-    icon: "basketball",
-    label: "Sports",
-    value: 6,
-  },
-  {
-    backgroundColor: "#4b7bec",
-    icon: "headphones",
-    label: "Movies & Music",
-    value: 7,
-  },
-  {
-    backgroundColor: "#a55eea",
-    icon: "book-open-variant",
-    label: "Books",
-    value: 8,
-  },
-  {
-    backgroundColor: "#778ca3",
-    icon: "application",
-    label: "Other",
-    value: 9,
-  },
-];
-
 function ListingEditScreen() {
   const [progress, setProgress] = useState(0);
-  console.log(progress);
-  const handleSubmit = async (listing, cb) => {
-    setProgress(0);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleSubmit = async (listing, { resetForm }) => {
+    setModalVisible(true);
     const result = await listingsApi.addListing(listing, (progress) =>
       setProgress(progress)
     );
-    if (!result.ok) return alert("Could Not Add Listing");
-    alert("Added");
+    if (!result.ok) {
+      setModalVisible(false);
+      return alert("Could Not Add Listing");
+    }
+    resetForm();
   };
   return (
     <Screen style={styles.container}>
+      <View style={styles.modalContainer}>
+        <Modal
+          useNativeDriver
+          backdropOpacity={0.5}
+          isVisible={modalVisible}
+          style={styles.modal}
+          onBackButtonPress={() => setModalVisible(false)}
+        >
+          <View style={styles.modalView}>
+            {progress === 1 && (
+              <Done
+                onAnimationFinish={() => {
+                  setModalVisible(false);
+                }}
+              />
+            )}
+            <ActivityIndicator visible={progress !== 1} />
+          </View>
+        </Modal>
+      </View>
       <KeyboardAvoidingView>
         <Form
           initialValues={{

@@ -8,21 +8,26 @@ import { TouchableWithoutFeedback, View } from "react-native";
 import colors from "../../config/colors";
 
 const AppFormField = ({ name, width, ...otherProps }) => {
-  const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
+  const {
+    setFieldTouched,
+    errors,
+    touched,
+    values,
+    setFieldValue,
+  } = useFormikContext();
 
   return (
-    <TouchableWithoutFeedback onPress={() => handleChange(name)}>
-      <View>
-        <TextInput
-          selectionColor={colors.secondary}
-          onBlur={() => setFieldTouched(name)}
-          onChangeText={handleChange(name)}
-          width={width}
-          {...otherProps}
-        />
-        <ErrorMessage error={errors[name]} visible={touched[name]} />
-      </View>
-    </TouchableWithoutFeedback>
+    <>
+      <TextInput
+        selectionColor={colors.secondary}
+        onBlur={() => setFieldTouched(name)}
+        values={values[name]}
+        onChangeText={(text) => setFieldValue(name, text)}
+        width={width}
+        {...otherProps}
+      />
+      <ErrorMessage error={errors[name]} visible={touched[name]} />
+    </>
   );
 };
 

@@ -3,6 +3,10 @@ import client from "./client";
 const endpoint = "/listings";
 
 const getAllListings = () => client.get(endpoint);
+const getListingsByUser = (uid) => client.get(endpoint + "/user/" + uid);
+const getListingsByCategory = (cid) =>
+  client.get(endpoint + "/category/" + cid);
+  
 const addListing = (listing, onUploadProgress) => {
   const data = new FormData();
   data.append("title", listing.title);
@@ -18,7 +22,6 @@ const addListing = (listing, onUploadProgress) => {
   });
   data.append("userId", "604fc56814ebd61490bb4c3e");
 
-
   return client.post(endpoint, data, {
     onUploadProgress: (progress) =>
       onUploadProgress(progress.loaded / progress.total),
@@ -28,4 +31,6 @@ const addListing = (listing, onUploadProgress) => {
 export default {
   addListing,
   getAllListings,
+  getListingsByCategory,
+  getListingsByUser,
 };

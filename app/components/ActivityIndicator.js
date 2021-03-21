@@ -7,6 +7,7 @@ const ActivityIndicator = ({ visible = false }) => {
     <LottieView
       autoPlay
       loop
+      speed={2}
       source={require("../assets/animations/loader.json")}
     />
   );
