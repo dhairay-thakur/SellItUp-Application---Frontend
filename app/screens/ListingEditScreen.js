@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert, KeyboardAvoidingView } from "react-native";
 import * as Yup from "yup";
 
@@ -82,13 +82,15 @@ const categories = [
 ];
 
 function ListingEditScreen() {
-  // const location = useLocation();
-
-  const handleSubmit = async (listing) => {
-    const x = { ...listing, location };
-    const result = await listingsApi.addListing(x);
-    if (!result.ok) return Alert("Could Not Add Listing");
-    else return Alert("Added");
+  const [progress, setProgress] = useState(0);
+  console.log(progress);
+  const handleSubmit = async (listing, cb) => {
+    setProgress(0);
+    const result = await listingsApi.addListing(listing, (progress) =>
+      setProgress(progress)
+    );
+    if (!result.ok) return alert("Could Not Add Listing");
+    alert("Added");
   };
   return (
     <Screen style={styles.container}>
