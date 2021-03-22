@@ -128,7 +128,7 @@ function ListingDetailsScreen({ navigation, route }) {
                       setModalVisible(false);
                       navigation.navigate(routes.LISTINGS_FILTER, {
                         userName: data.user.name,
-                        userId: "604fc56814ebd61490bb4c3e",
+                        userId: listing.userId,
                         categoryId: null,
                       });
                     }}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { KeyboardAvoidingView, View } from "react-native";
+import React, { useState, useContext } from "react";
+import { KeyboardAvoidingView, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 
 import {
@@ -15,9 +15,10 @@ import Screen from "../components/Screen";
 import FormImagePicker from "../components/forms/FormImagePicker";
 import Modal from "react-native-modal";
 import listingsApi from "../api/listings";
+import AuthContext from "../auth/context";
+
 import categories from "../constants/categories";
 import styles from "../styles/ListingEdit";
-import { ScrollView } from "react-native-gesture-handler";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -28,13 +29,17 @@ const validationSchema = Yup.object().shape({
 });
 
 function ListingEditScreen() {
+  const { user } = useContext(AuthContext);
+  
   const [progress, setProgress] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleSubmit = async (listing, { resetForm }) => {
     setModalVisible(true);
-    const result = await listingsApi.addListing(listing, (progress) =>
-      setProgress(progress)
+    const result = await listingsApi.addListing(
+      listing,
+      user.userId,
+      (progress) => setProgress(progress)
     );
     if (!result.ok) {
       setModalVisible(false);

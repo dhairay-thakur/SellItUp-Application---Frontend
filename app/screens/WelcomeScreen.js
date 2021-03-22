@@ -22,7 +22,6 @@ function WelcomeScreen({ navigation }) {
         />
         <Button
           title="Register"
-          color="secondary"
           onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>

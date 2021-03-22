@@ -5,4 +5,6 @@ const endpoint = "/users";
 const login = (email, password) =>
   client.post(endpoint + "/login", { email, password });
 
-export default { login };
+const register = (userInfo) => client.post(endpoint + "/signup", userInfo);
+
+export default { login, register };

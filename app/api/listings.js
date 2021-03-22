@@ -6,8 +6,8 @@ const getAllListings = () => client.get(endpoint);
 const getListingsByUser = (uid) => client.get(endpoint + "/user/" + uid);
 const getListingsByCategory = (cid) =>
   client.get(endpoint + "/category/" + cid);
-  
-const addListing = (listing, onUploadProgress) => {
+
+const addListing = (listing, userId, onUploadProgress) => {
   const data = new FormData();
   data.append("title", listing.title);
   if (listing.description) data.append("description", listing.description);
@@ -20,7 +20,7 @@ const addListing = (listing, onUploadProgress) => {
       type: "image/jpeg",
     });
   });
-  data.append("userId", "604fc56814ebd61490bb4c3e");
+  data.append("userId", userId);
 
   return client.post(endpoint, data, {
     onUploadProgress: (progress) =>

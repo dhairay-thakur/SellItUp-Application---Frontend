@@ -23,11 +23,18 @@ function AccountScreen({ navigation }) {
         <ListItem
           title={user.name}
           subTitle={user.email}
-          image={require("../assets/mosh.jpg")}
+          image={require("../assets/dummy.png")}
         />
       </View>
       <View style={styles.container}>
         <ListItem
+          onPress={() => {
+            navigation.navigate(routes.LISTINGS_FILTER, {
+              userName: user.name,
+              userId: user.userId,
+              categoryId: null,
+            });
+          }}
           title="My Listings"
           IconComponent={
             <Icon
