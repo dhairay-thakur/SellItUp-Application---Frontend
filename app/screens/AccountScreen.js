@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View } from "react-native";
 
 import ListItem from "../components/ListItem";
@@ -8,14 +8,21 @@ import routes from "../navigation/routes";
 import Screen from "../components/Screen";
 
 import styles from "../styles/Account";
+import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
 
 function AccountScreen({ navigation }) {
+  const { user, setUser } = useContext(AuthContext);
+  const handleLogOut = () => {
+    setUser(null);
+    authStorage.removeToken();
+  };
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Dhairay Thakur"
-          subTitle="dhairaythakur.che18@iitbhu.ac.in"
+          title={user.name}
+          subTitle={user.email}
           image={require("../assets/mosh.jpg")}
         />
       </View>
@@ -31,6 +38,7 @@ function AccountScreen({ navigation }) {
         />
       </View>
       <ListItem
+        onPress={handleLogOut}
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#7D8CC4" />}
       />

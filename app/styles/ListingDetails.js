@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 import colors from "../config/colors";
 const styles = StyleSheet.create({
+  error: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+  },
   cross: {
     width: "100%",
     justifyContent: "flex-end",
@@ -47,6 +52,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     marginVertical: 5,
   },
+  textUser: { textAlign: "center" },
   userDetails: {
     marginTop: 16,
     borderWidth: 1,
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
     borderColor: colors.secondary,
     borderRadius: 40,
     padding: 10,
-    paddingBottom: 12,
+    paddingBottom: 22,
     flexDirection: "row",
     alignItems: "baseline",
     justifyContent: "space-between",
@@ -67,11 +73,12 @@ const styles = StyleSheet.create({
     borderColor: colors.secondary,
     borderStyle: "dotted",
     borderRadius: 40,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
     paddingBottom: 12,
     flexDirection: "row",
-    alignItems: "baseline",
-    justifyContent: "space-evenly",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 export default styles;
