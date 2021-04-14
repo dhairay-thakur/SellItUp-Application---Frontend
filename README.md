@@ -11,8 +11,8 @@
 The integrated backend for this application, built using nodeJs and expressJs, with MongoDB as the associated database, can be found [here](https://github.com/dhairay-thakur/SellitUp-Application---backend) 
 
 
-https://user-images.githubusercontent.com/56518563/112034098-22b1cc00-8b64-11eb-87a1-113317883a66.mp4
+# Demo
 
-https://user-images.githubusercontent.com/56518563/112034446-7fad8200-8b64-11eb-8d88-39b6a3cd393d.mp4
-
-![Screenshot_2021-03-22-22-52-17-61_f73b71075b1de7323614b647fe394240](https://user-images.githubusercontent.com/56518563/112035668-c94a9c80-8b65-11eb-8817-f2ad13e51f5e.jpg)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/56518563/114698105-508dc900-9d3c-11eb-927a-38301b42b701.gif) 
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/56518563/114698129-5a173100-9d3c-11eb-897f-97cc0b719df8.gif) 
+![Screenshot_2021-03-22-22-52-17-61_f73b71075b1de7323614b647fe394240](https://user-images.githubusercontent.com/56518563/114698349-a4001700-9d3c-11eb-8bf8-5cb2129009b0.jpg)
